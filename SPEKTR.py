@@ -53,5 +53,32 @@ def NearestSpectrum_fig(rawpath):
 	filename='nearlySpectrum'
 	plt.savefig(filename)
 	plt.close()
+
+def B3FQQNew_Pred_fig():
+	lineCount=0
+	x=[]
+	fig=plt.figure()
+	csv1_name = '/mnt/nfs_S65/Takayuki/SpectrumEstimation/CrossEntropy_Zscore/New_estimate/B3F.txt'
+	csv2_name = '/mnt/nfs_S65/Takayuki/SpectrumEstimation/CrossEntropy_Zscore/New_estimate/QQ.txt'
+	csv3_name = '/mnt/nfs_S65/Takayuki/SpectrumEstimation/CrossEntropy_Zscore/New_estimate/New.txt'
+
+	f1=np.loadtxt(csv1_name,delimiter=' ')
+	f2=np.loadtxt(csv2_name,delimiter=' ')
+	f3=np.loadtxt(csv3_name,delimiter=' ')
+
+	B3F=np.array(f1)
+	QQ=np.array(f2)
+	New=np.array(f3)
+
+	plt.plot(B3F,label="B3F")
+	plt.plot(QQ,label="QQ")
+	plt.plot(New,label="New")
+	
+	plt.title('spectrum_pred')
+	plt.legend(loc='upper right')
+	#plt.xlabel('')
+	#plt.ylabel('')
+	fig.savefig("NewEstimation_check.png")
+
 #rawpath="/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500/spectrum1.text"
 #NearestSpectrum_fig(rawpath)
