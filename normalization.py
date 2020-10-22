@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 
-def SPEKTR_Normalization():
+def SPEKTR_Normalization_text():
 	lineCount=0
 	sum=0
 	data0=np.array([],dtype=np.float) #start
@@ -28,4 +28,17 @@ def SPEKTR_Normalization():
 		lineCount=0
 		x=[]
 
-SPEKTR_Normalization()
+def SPEKTR_Normalization_csv():
+	csv1_name = './spectrum7500.csv'
+	f1=np.loadtxt(csv1_name,delimiter=',')
+
+	spectrum=np.array(f1)
+	
+	sum=np.sum(spectrum,axis=1)
+
+	spectrum_normalization=np.empty((7500,150))
+
+	for i in range(0,7500):
+		spectrum_normalization[i,:]=spectrum[i,:]/sum[i]
+
+	np.savetxt('spectrum_normalization.csv',spectrum_normalization,fmt='%.6f')
