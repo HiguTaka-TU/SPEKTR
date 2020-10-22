@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 
-def SPEKTR_fig(rawpath):
+def SPEKTR_fig_text(rawpath):
 	lineCount=0
 	x=[]
 	fig = plt.figure()
@@ -24,6 +24,22 @@ def SPEKTR_fig(rawpath):
 	filename='./spectrum.png'
 	plt.savefig(filename)
 	plt.close()
+
+def SPEKTR_fig_csv():
+	csv_name = './spectrum7500_normalization.csv'
+
+	f1=np.loadtxt(csv_name,delimiter=' ')
+
+	spectrum=np.array(f1)
+
+	fig = plt.figure()
+	i=0 
+	plt.plot(spectrum[i])
+	filename='./spectrum.png'
+	plt.savefig(filename)
+	plt.close()
+
+SPEKTR_fig_csv()
 
 
 def NearestSpectrum_fig(rawpath):
