@@ -39,8 +39,6 @@ def SPEKTR_fig_csv():
 	plt.savefig(filename)
 	plt.close()
 
-SPEKTR_fig_csv()
-
 
 def NearestSpectrum_fig(rawpath):
 	lineCount=0
