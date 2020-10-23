@@ -39,6 +39,30 @@ def SPEKTR_fig_csv():
 	plt.savefig(filename)
 	plt.close()
 
+def SPEKTR_TEXTtoCSV():
+	for i in range(1,100):
+		lineCount=0
+       		x=[]
+        	fig = plt.figure()
+        	for line in open(rawpath,"r"):
+                	lineCount += 1
+                	if lineCount ==1:
+                        	continue
+                	data=line.split()
+                	x.append(data[2])
+        	plt.plot(x,color="blue")
+        	lineCount=0
+
+
+	 	with open('spectrum.csv','a') as f:
+                	writer=csv.writer(f)
+                	writer.writerow(x)
+		
+        	x=[] #reset
+
+
+
+
 
 def NearestSpectrum_fig(rawpath):
 	lineCount=0
