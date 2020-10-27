@@ -42,23 +42,23 @@ def SPEKTR_fig_csv():
 def SPEKTR_TEXTtoCSV():
 	for i in range(1,100):
 		lineCount=0
-       		x=[]
-        	fig = plt.figure()
-        	for line in open(rawpath,"r"):
-                	lineCount += 1
-                	if lineCount ==1:
-                        	continue
-                	data=line.split()
-                	x.append(data[2])
-        	plt.plot(x,color="blue")
-        	lineCount=0
+		x=[]
+		fig = plt.figure()
+		for line in open(rawpath,"r"):
+			lineCount += 1
+			if lineCount ==1:
+				continue
+			data=line.split()
+			x.append(data[2])
+		plt.plot(x,color="blue")
+		lineCount=0
 
 
-	 	with open('spectrum.csv','a') as f:
-                	writer=csv.writer(f)
-                	writer.writerow(x)
+		with open('spectrum.csv','a') as f:
+			writer=csv.writer(f)
+			writer.writerow(x)
 		
-        	x=[] #reset
+		x=[] #reset
 
 
 
@@ -118,5 +118,18 @@ def B3FQQNew_Pred_fig():
 	#plt.ylabel('')
 	fig.savefig("NewEstimation_check.png")
 
-#rawpath="/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500/spectrum1.text"
-#NearestSpectrum_fig(rawpath)
+def MeanEnergy():
+	Mean_Energy=[]
+	for i in range(1,7501):
+		rawpath="/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500_normalization/spectrum_normalization%d.text" % i
+		Mean=0
+		data=np.loadtxt(rawpath,skiprows=1)
+		for i in range(data.shape[0]):
+			Mean+=1000 * (data[i][0]+data[i][1])/2 * data[i][2]
+		print(Mean)
+		Mean_Energy.append(Mean)
+	
+	with open('MeanEnergy.csv','a') as f:
+		writer=csv.writer(f)
+		writer.writerow(Mean_Energy)
+MeanEnergy()
