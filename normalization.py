@@ -9,7 +9,7 @@ def SPEKTR_Normalization_text():
 	data1=np.array([],dtype=np.float) #end 
 	data2=np.array([],dtype=np.float) #spectrum
 
-	for i in range(1,2):
+	for i in range(1,7501):
 		rawpath='/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500/spectrum%d.text' % i
 		a=np.loadtxt(rawpath,skiprows=1)
 		for j in range(0,len(a)):
@@ -18,7 +18,7 @@ def SPEKTR_Normalization_text():
 		for j in range(0,len(a)):
 			a[j][2]=a[j][2]/sum
 
-		rawpath_out='./spectrum.text'
+		rawpath_out='/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500_normalization/spectrum_normalization%d.text' % i
 		with open(rawpath_out,'w') as f:
 			f.write("1\n")
 			for j in range(0,len(a)):
@@ -42,3 +42,4 @@ def SPEKTR_Normalization_csv():
 		spectrum_normalization[i,:]=spectrum[i,:]/sum[i]
 
 	np.savetxt('spectrum_normalization.csv',spectrum_normalization,fmt='%.6f')
+SPEKTR_Normalization_text()
