@@ -70,8 +70,8 @@ def spectrum_fig(spectrum):
 	plt.close()
 
 #データセットのためにテキストファイルをcsvファイルにまとめる
-def SPEKTR_text_to_csv(file_number,text_name,csv_name):
-	for i in range(1,file_number+1):
+def SPEKTR_text_to_csv(file_size,text_name,csv_name):
+	for i in range(1,file_size+1):
 	
 
 #テキストファイルからスペクトルの割合を抜き出す
@@ -99,6 +99,7 @@ def mean_energy(file_name,mean_energy):
 			Mean+=1000 * (data[i][0]+data[i][1])/2 * data[i][2]
 		mean_energy.append(Mean)
 
+#平均エネルギーの比較
 def mean_energy_compare():
 	fig=plt.figure()
 	x1=np.arange(0.1,10.1,0.1)
@@ -115,7 +116,7 @@ def mean_energy_compare():
 	plt.savefig(filename)
 
 
-
+#平均エネルギーのプロット
 def mean_energy_fig():
 	x=np.arange(1,10000,1)
 
@@ -133,4 +134,5 @@ def mean_energy_fig():
 	plt.savefig(filename)
 	plt.close()
 
-MeanEnergy_fig()
+if __name__=="__main__":
+	MeanEnergy_fig()
