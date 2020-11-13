@@ -1,45 +1,50 @@
+# -*- coding: utf-8 -*-
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
 
-def SPEKTR_Normalization_text():
-	lineCount=0
-	sum=0
-	data0=np.array([],dtype=np.float) #start
-	data1=np.array([],dtype=np.float) #end 
-	data2=np.array([],dtype=np.float) #spectrum
+import SPEKTR
 
-	for i in range(1,7501):
-		rawpath='/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500/spectrum%d.text' % i
-		a=np.loadtxt(rawpath,skiprows=1)
-		for j in range(0,len(a)):
-			sum+=a[j][2]
+#スペクトルの合計値を計算
+def calc_spectrum_sum(spectrum):
+	sum_spectrum=np.sum(spectrum[:,2])
 
-		for j in range(0,len(a)):
-			a[j][2]=a[j][2]/sum
+	return sum_spectrum
 
-		rawpath_out='/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500_normalization/spectrum_normalization%d.text' % i
-		with open(rawpath_out,'w') as f:
-			f.write("1\n")
-			for j in range(0,len(a)):
-				f.write("{:.3f} {:.3f} {:.6f}\n".format(a[j][0],a[j][1],a[j][2]))
-		#reset
-		sum=0
-		lineCount=0
-		x=[]
+#正規化したスペクトルを返す
+def specturm_normalization(spectrum,sum_spectrum):
+	spectrum[:,2]=spectrum[:,2]/sum_spectrum
+	return spectrum
 
-def SPEKTR_Normalization_csv():
-	csv1_name = './spectrum7500.csv'
-	f1=np.loadtxt(csv1_name,delimiter=',')
+#正規化したスペクトルをファイルに書き込み	
+def write_spectrum(file_name,spectrum_norm):
+	with open(file_name,'w') as f:
+		f.write("1\n")
+		for j in range(len(spectrum_norm)):
+			f.write("{:.3f} {:.3f} {:.6f}\n".format(spectrum_norm[j][0],spectrum_norm[j][1],spectrum_norm[j][2]))
 
-	spectrum=np.array(f1)
+#csvファイルに格納されたスペクトルを正規化する
+def spectrum_normalization_from_csv(data):
+	spectrum=np.array(data)
 	
-	sum=np.sum(spectrum,axis=1)
+	sum_spectrum=np.sum(spectrum,axis=1)
 
-	spectrum_normalization=np.empty((7500,150))
+	spectrum_norm=np.empty_like(spectrum)
 
-	for i in range(0,7500):
-		spectrum_normalization[i,:]=spectrum[i,:]/sum[i]
+	for i in range(spectrum_norm.shape[0]):
+		spectrum_norm[i,:]=spectrum[i,:]/sum_spectrum[i]
 
 	np.savetxt('spectrum_normalization.csv',spectrum_normalization,fmt='%.6f')
-SPEKTR_Normalization_text()
+
+if __name__=="__main__":
+	file_name='/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500/spectrum1.text'
+	
+	spectrum=SPEKTR.load_spectrum_txt(file_name)
+	
+	sum_spectrum=calc_spectrum_sum(spectrum)
+	
+	spectrum_norm=specturm_normalization(spectrum,sum_spectrum)
+
+	file_name='1.txt'
+
+	write_spectrum(file_name,spectrum_norm)
