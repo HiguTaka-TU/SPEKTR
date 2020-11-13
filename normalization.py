@@ -36,7 +36,7 @@ def spectrum_normalization_from_csv(data):
 
 	np.savetxt('spectrum_normalization.csv',spectrum_normalization,fmt='%.6f')
 
-if __name__=="__main__":
+def main():
 	file_name='/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500/spectrum1.text'
 	
 	spectrum=SPEKTR.load_spectrum_txt(file_name)
@@ -48,3 +48,6 @@ if __name__=="__main__":
 	file_name='1.txt'
 
 	write_spectrum(file_name,spectrum_norm)
+
+if __name__=="__main__":
+	main()
