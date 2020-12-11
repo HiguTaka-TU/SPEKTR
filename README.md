@@ -3,7 +3,8 @@
 SPEKTR3.0を用いてX線スペクトルを生成します。
 
 ## SPEKTRをダウンロード
-以下のリンクよりSPEKTR3.0をダウンロードします。
-https://istar.jhu.edu/downloads/
-
-
+以下のリンクよりSPEKTR3.0をダウンロードします。  
+https://istar.jhu.edu/downloads/  
+ダウンロードしたSpektrCodeのディレクトリにgenerate_spectrum.mを置き、MATLABを起動  
+スペクトルを生成する  
+generate_spectrum
