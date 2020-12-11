@@ -11,7 +11,7 @@ for k =1:1:10000; %10000種類のスペクトルを生成
     
     mmCu=rand*0.5; % Cu 0~0.5 mm
     fp=spektrBeers(fp,[29 mmCu]); % Cuフィルタを付加
-;
+
     M=max(fp); % 最大値を取得
     fp=fp/M; % 最大値を1に正規化
     
