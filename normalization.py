@@ -2,8 +2,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
+import os
 
-import SPEKTR
+#ファイルからスペクトルを読み込み
+def load_spectrum_txt(file_name):
+	spectrum=np.loadtxt(file_name,skiprows=1)
+	
+	return spectrum
 
 #スペクトルの合計値を計算
 def calc_spectrum_sum(spectrum):
@@ -14,7 +19,8 @@ def calc_spectrum_sum(spectrum):
 #正規化したスペクトルを返す
 def specturm_normalization(spectrum,sum_spectrum):
 	spectrum[:,2]=spectrum[:,2]/sum_spectrum
-	return spectrum
+	
+	return spectrum_norm
 
 #正規化したスペクトルをファイルに書き込み	
 def write_spectrum(file_name,spectrum_norm):
@@ -23,31 +29,20 @@ def write_spectrum(file_name,spectrum_norm):
 		for j in range(len(spectrum_norm)):
 			f.write("{:.3f} {:.3f} {:.6f}\n".format(spectrum_norm[j][0],spectrum_norm[j][1],spectrum_norm[j][2]))
 
-#csvファイルに格納されたスペクトルを正規化する
-def spectrum_normalization_from_csv(data):
-	spectrum=np.array(data)
-	
-	sum_spectrum=np.sum(spectrum,axis=1)
-
-	spectrum_norm=np.empty_like(spectrum)
-
-	for i in range(spectrum_norm.shape[0]):
-		spectrum_norm[i,:]=spectrum[i,:]/sum_spectrum[i]
-
-	np.savetxt('spectrum_normalization.csv',spectrum_normalization,fmt='%.6f')
 
 def main():
-	file_name='/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/SPEKTRspectrum7500/spectrum1.text'
+	for i in range(10000):
+		input_name='./Spectrum/spectrum%d.text' % i
 	
-	spectrum=SPEKTR.load_spectrum_txt(file_name)
+		spectrum=load_spectrum_txt(input_name)
 	
-	sum_spectrum=calc_spectrum_sum(spectrum)
+		sum_spectrum=calc_spectrum_sum(spectrum)
 	
-	spectrum_norm=specturm_normalization(spectrum,sum_spectrum)
+		spectrum_norm=specturm_normalization(spectrum,sum_spectrum)
 
-	file_name='1.txt'
+		output_name='./Specturm_norm/spectrum_norm%d.txt'
 
-	write_spectrum(file_name,spectrum_norm)
+		write_spectrum(output_name,spectrum_norm)
 
 if __name__=="__main__":
 	main()
