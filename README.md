@@ -13,4 +13,7 @@ MATLABを起動し、スペクトルを生成
 
 3.スペクトルの各ビンの和を１にする  
 "Spectrum_norm"というディレクトリを作成し、以下コマンドを実行く   
-`$python normalization.py`
+`$python normalization.py`  
+これで正規化されたスペクトルの完成である  
+
+4.データセットとしてまとめて取り扱うためCSVファイルに保存する
