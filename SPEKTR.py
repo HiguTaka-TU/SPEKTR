@@ -69,17 +69,12 @@ def spectrum_fig(spectrum):
 	
 	plt.close()
 
-#データセットのためにテキストファイルをcsvファイルにまとめる
-def SPEKTR_text_to_csv(file_size,text_name,csv_name):
-	for i in range(1,file_size+1):
-	
-
 #テキストファイルからスペクトルの割合を抜き出す
-def extract_spectrum_txt():
+def extract_spectrum_txt(input_file):
 	#初期化
 	line_count=0
 	fraction=[]
-	for line in open(text_name,"r"):
+	for line in open(input_file,"r"):
 		line_count += 1 
 		if line_count ==1: #一行目は無視
 			continue
@@ -92,7 +87,6 @@ def extract_spectrum_txt():
 #mean_energyは空の配列 mean_energy=[]
 def mean_energy(file_name,mean_energy):
 	for i in range(1,10000):
-		#i=float(i/10)
 		Mean=0
 		data=np.loadtxt(file_name,skiprows=1)
 		for i in range(data.shape[0]):
@@ -135,4 +129,11 @@ def mean_energy_fig():
 	plt.close()
 
 if __name__=="__main__":
-	MeanEnergy_fig()
+	for i in range(10000):
+		i = i+1
+		path_in='../../SPEKTR3.0/SpektrCode/spectrum10000/spectrum%d.text' % i
+		fraction=extract_spectrum_txt(path_in)	
+		
+		path_out='10000.csv'
+		write_csv_a(path_out,fraction)
+		print(i)
