@@ -6,7 +6,10 @@ SPEKTR3.0を用いてX線スペクトルを生成します。
 1.以下のリンクよりSPEKTR3.0をダウンロードします。  
 https://istar.jhu.edu/downloads/  
 
-2.ダウンロードしたSPEKTR3.0のSpektr Codeのディレクトリにgenerate_spectrum.mを置き、MATLABを起動  
-スペクトルを生成する  
+2.ダウンロードしたSPEKTR3.0のSpektr Codeのディレクトリにgenerate_spectrum.mを置き、"Spectrum"というディレクトリを作成し、スペクトルを生成する  
+MATLABを起動し、スペクトルを生成する  
 `$generate_spectrum`    
-"Spectrum"というディレクトリにスペクトルが生成される
+
+3.スペクトルの各ビンの和を１にする  
+"Spectrum_norm"というディレクトリを作成し、以下コマンドを実行
+`$python normalization.py`
