@@ -3,30 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 
-#データの読み込みを行う
-def load_data_csv_space(file_name):
-	data=np.loadtxt(file_name,delimiter=' ')
-	
-	return data
-
-def load_data_csv_comma(file_name):
-	data=np.loadtxt(file_name,delimiter=',')
-	
-	return data
-	
-def load_spectrum_txt(file_name):
-	data=np.loadtxt(file_name,skiprows=1)
-	
-	return data
-
 #データの書き込みを行う
-def write_csv_a(csv_name,data):
-	with open(csv_name,'a') as f:
-		writer=csv.writer(f)
-		writer.writerow(data)
-		
-def write_csv_w(csv_name,data):
-	with open(csv_name,'w') as f:
+def write_csv(csv_name,data,mode): #mode= 'w' or 'a'
+	with open(csv_name,mode) as f:
 		writer=csv.writer(f)
 		writer.writerow(data)
 
@@ -86,49 +65,38 @@ def extract_spectrum_txt(input_file):
 
 #mean_energyは空の配列 mean_energy=[]
 def mean_energy(file_name,mean_energy):
-	for i in range(1,10000):
-		Mean=0
-		data=np.loadtxt(file_name,skiprows=1)
-		for i in range(data.shape[0]):
-			Mean+=1000 * (data[i][0]+data[i][1])/2 * data[i][2]
-		mean_energy.append(Mean)
-
-#平均エネルギーの比較
-def mean_energy_compare():
-	fig=plt.figure()
-	x1=np.arange(0.1,10.1,0.1)
-	x2=np.arange(0.1,5.1,0.1)
+	mean=0
+	data=np.loadtxt(file_name,skiprows=1)
+	print(data)
+	for i in range(data.shape[0]):
+		mean+=1000 * (data[i][0]+data[i][1])/2 * data[i][2]
+	mean_energy.append(mean)
 	
-	
-	plt.scatter(x1,f1,marker='^',color='b',label='Al0-10mm')
-	plt.scatter(x2,f2,marker='^',color='orange',label='Cu0-5mm')
-	
-	plt.xlabel('filter thickness')
-	plt.ylabel('Mean Energy')
-	filename='MeanEnergy.png'
-	plt.legend(loc='upper right')
-	plt.savefig(filename)
+	write_csv('mean_energy.csv',mean_energy,'a')
 
 
 #平均エネルギーのプロット
 def mean_energy_fig():
-	x=np.arange(1,10000,1)
+	x=np.arange(1,10000+1)
 
 	fig=plt.figure()
 	
-	
 	plt.scatter(x,MeanEnergy,s=10,marker='^',label='81-140kV')
 	
-	plt.xlabel('spectrum Number')
-	plt.ylabel('MeanEnergy')
+	plt.xlabel('Spectrum Number')
+	plt.ylabel('Mean Energy')
 	
-	plt.title('MeanEnergy')
+	plt.title('Mean Energy')
 	plt.legend(loc='upper left')
 	filename='MeanEnergy.png'
 	plt.savefig(filename)
 	plt.close()
 
 if __name__=="__main__":
+	mean=[]
+	file_name='/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/spectrum10000_normalization/spectrum1.text'
+	mean_energy(file_name,mean)
+	"""
 	for i in range(10000):
 		i = i+1
 		path_in='../../SPEKTR3.0/SpektrCode/spectrum10000/spectrum%d.text' % i
@@ -137,3 +105,4 @@ if __name__=="__main__":
 		path_out='10000.csv'
 		write_csv_a(path_out,fraction)
 		print(i)
+	"""
