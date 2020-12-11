@@ -2,7 +2,7 @@ ii=1;
 for k =1:1:10000; %10000種類のスペクトルを生成
     kV=randi([80 140]); %80kV~140kV
     
-    formatSpec='./spectrum100000/spectrum%d.text'; % file name
+    formatSpec='./Spectrum/spectrum%d.text'; % file name
     
     ripple=randi([0 100]); %ripple 0~100%
     
