@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import matplotlib.pyplot as plt
-import csv
-import os
 
 #ファイルからスペクトルを読み込み
 def load_spectrum_txt(file_name):
@@ -20,7 +18,7 @@ def calc_spectrum_sum(spectrum):
 def specturm_normalization(spectrum,sum_spectrum):
 	spectrum[:,2]=spectrum[:,2]/sum_spectrum
 	
-	return spectrum_norm
+	return spectrum
 
 #正規化したスペクトルをファイルに書き込み	
 def write_spectrum(file_name,spectrum_norm):
@@ -31,7 +29,9 @@ def write_spectrum(file_name,spectrum_norm):
 
 
 def main():
-	for i in range(10000):
+	for i in range(10):
+		i=i+1
+		
 		input_name='./Spectrum/spectrum%d.text' % i
 	
 		spectrum=load_spectrum_txt(input_name)
@@ -40,7 +40,7 @@ def main():
 	
 		spectrum_norm=specturm_normalization(spectrum,sum_spectrum)
 
-		output_name='./Specturm_norm/spectrum_norm%d.txt'
+		output_name='./Spectrum_norm/spectrum_norm%d.txt' % i
 
 		write_spectrum(output_name,spectrum_norm)
 
