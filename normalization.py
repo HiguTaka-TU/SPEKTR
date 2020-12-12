@@ -16,7 +16,7 @@ def calc_spectrum_sum(spectrum):
 #正規化したスペクトルを返す
 def specturm_normalization(spectrum,sum_spectrum):
 	spectrum[:,2]=spectrum[:,2]/sum_spectrum
-
+	
 	return spectrum
 
 #正規化したスペクトルをファイルに書き込み	
@@ -28,11 +28,11 @@ def write_spectrum(file_name,spectrum_norm):
 
 
 def main():
-	for i in range(10000):
+	for i in range(10):
 		i=i+1
 		
-		input_name='./Spectrum/spectrum%d.text' % i	
-		
+		input_name='./Spectrum/spectrum%d.text' % i
+	
 		spectrum=load_spectrum_txt(input_name)
 	
 		sum_spectrum=calc_spectrum_sum(spectrum)
@@ -42,7 +42,6 @@ def main():
 		output_name='./Spectrum_norm/spectrum_norm%d.txt' % i
 
 		write_spectrum(output_name,spectrum_norm)
-
 
 if __name__=="__main__":
 	main()
