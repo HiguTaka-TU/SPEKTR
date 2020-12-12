@@ -22,4 +22,8 @@ MATLABを起動し、スペクトルを生成
 各スペクトルの平均エネルギーをプロットしたmean_energy.png、CSVファイルにまとめたmean_energy.csvが生成される
 
 ## CSVファイルにまとめる  
-1.データセットとしてまとめて取り扱うためCSVファイルに保存する
+データセットとしてまとめて取り扱うためCSVファイルに保存する  
+`$python make_dataset.py`  
+生成されたスペクトルを格納したCSVファイルspectrum_norm_{data_size}.csvが生成される  
+＊{data_size}にはスペクトルの個数が入る  
+
