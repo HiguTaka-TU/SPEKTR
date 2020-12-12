@@ -68,10 +68,6 @@ def extract_spectrum_txt(input_file):
 
 
 if __name__=="__main__":
-	mean=[]
-	file_name='/mnt/nfs_S65/Takayuki/package_TotalDensityEstimation/SPEKTRspectrum/spectrum10000_normalization/spectrum1.text'
-	mean_energy(file_name,mean)
-	
 	"""
 	for i in range(10000):
 		i = i+1
