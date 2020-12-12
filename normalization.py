@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#スペクトルをテキストファイルから読み込み
 def load_spectrum_txt(file_name):
 	spectrum=np.loadtxt(file_name,skiprows=1)
 	
@@ -28,7 +29,7 @@ def write_spectrum(file_name,spectrum_norm):
 
 
 def main():
-	for i in range(10):
+	for i in range(100):
 		i=i+1
 		
 		input_name='./Spectrum/spectrum%d.text' % i
